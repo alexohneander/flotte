@@ -8,6 +8,9 @@ import (
 
 func main() {
 
+	// Create Register Token if not exists
+	servicediscovery.InitializedToken()
+
 	// Create a new ServeMux
 	mux := http.NewServeMux()
 
