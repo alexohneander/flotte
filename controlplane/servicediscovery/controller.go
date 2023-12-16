@@ -7,6 +7,11 @@ import (
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {
-	log.Println("Registering new Worker..")
+	log.Println("ServiceDiscovery: Registering new Worker..")
+	io.WriteString(w, "Hello, HTTP!\n")
+}
+
+func Unregister(w http.ResponseWriter, r *http.Request) {
+	log.Println("ServiceDiscovery: Unregistering Worker..")
 	io.WriteString(w, "Hello, HTTP!\n")
 }

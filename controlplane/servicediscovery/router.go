@@ -10,6 +10,7 @@ func RegisterHandler(mux *http.ServeMux) *http.ServeMux {
 
 	// Register Handler
 	mux.HandleFunc("/servicediscovery/register", Register)
+	mux.HandleFunc("/servicediscovery/unregister", Unregister)
 
 	return mux
 }
