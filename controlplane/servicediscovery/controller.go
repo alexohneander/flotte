@@ -32,7 +32,6 @@ func RegisterWorker(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 				http.Error(w, "Unauthorized", http.StatusUnauthorized)
 				return
 			} else {
-				log.Println("Service Discovery: Token is correct")
 				id := uuid.New().String()
 				result := db.Create(&model.WorkerPlane{
 					ID:      id,
