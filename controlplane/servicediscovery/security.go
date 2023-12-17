@@ -7,9 +7,11 @@ import (
 	"os"
 )
 
+var tokenPath string = "/tmp/token.yaml"
+
 func InitializedToken() string {
 	// Check if token.yaml exists
-	if _, err := os.Stat("/tmp/token.yaml"); err == nil {
+	if _, err := os.Stat(tokenPath); err == nil {
 		log.Println("ServiceDiscovery: Token file exists")
 		// If yes, read token.yaml
 		token := GetToken()
@@ -22,7 +24,7 @@ func InitializedToken() string {
 		log.Println("ServiceDiscovery: Token was created")
 
 		// Write token to token.yaml
-		err := os.WriteFile("/tmp/token.yaml", []byte(token), 0644)
+		err := os.WriteFile(tokenPath, []byte(token), 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -46,8 +48,8 @@ func createToken() string {
 
 func GetToken() string {
 	// Check if token.yaml exists
-	if _, err := os.Stat("/tmp/token.yaml"); err == nil {
-		tokenByte, err := os.ReadFile("/tmp/token.yaml")
+	if _, err := os.Stat(tokenPath); err == nil {
+		tokenByte, err := os.ReadFile(tokenPath)
 		if err != nil {
 			log.Fatal(err)
 		}
