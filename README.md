@@ -4,4 +4,4 @@ This is my try to build a distributed system with leader election and service di
 
 ## Architecture
 
-![Architecture](./docs/architecture.png)
+![Architecture](./docs/architecture-high-level.png)
