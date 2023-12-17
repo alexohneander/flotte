@@ -10,7 +10,7 @@ var databasePath string = "/tmp/flotte.db"
 func InitializeDatabase() {
 	// Check if database exists
 	if _, err := os.Stat(databasePath); err == nil {
-		log.Println("Database: Database file exists")
+		log.Println("Database: Database already initialized")
 		// If yes, read database
 	} else if os.IsNotExist(err) {
 		log.Println("Database: Database file does not exist")
