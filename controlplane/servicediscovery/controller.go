@@ -34,12 +34,18 @@ func RegisterWorker(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 			} else {
 				log.Println("Service Discovery: Token is correct")
 				id := uuid.New().String()
-				db.Create(&model.WorkerPlane{
+				result := db.Create(&model.WorkerPlane{
 					ID:      id,
 					Name:    jsonBody["Name"].(string),
 					IP:      jsonBody["IP"].(string),
 					APIPort: jsonBody["APIPort"].(string),
 				})
+
+				if result.Error != nil {
+					log.Println("Service Discovery: Worker could not be registered")
+					http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+					return
+				}
 
 				log.Println("Service Discovery: Worker registered")
 				var worker model.WorkerPlane
