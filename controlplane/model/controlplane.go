@@ -12,5 +12,6 @@ type ControlPlane struct {
 	APIPort    string
 	APIKey     string
 	Status     string
+	NodeCount  int
 	LastUpdate string `gorm:"autoUpdateTime"`
 }
