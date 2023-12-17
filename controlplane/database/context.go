@@ -11,16 +11,16 @@ import (
 var databasePath string = "/tmp/flotte.db"
 
 func InitializeDatabase() *gorm.DB {
-	log.Println("Database Context: Initializing Database..")
+	log.Println("DatabaseContext: Initializing Database..")
 	db, err := gorm.Open(sqlite.Open(databasePath), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic("DatabaseContext: failed to connect database")
 	}
 
 	// Migrate the schema
-	log.Println("Database Context: Migrating Database..")
+	log.Println("DatabaseContext: Migrating Database..")
 	db.AutoMigrate(&model.ControlPlane{})
-	log.Println("Database Context: Database initialized")
+	log.Println("DatabaseContext: Database initialized")
 
 	return db
 }

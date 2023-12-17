@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterHandler(mux *http.ServeMux, db *gorm.DB) *http.ServeMux {
-	log.Println("Registering Service Discovery Handler")
+	log.Println("HTTPRouter: Registering Service Discovery Handler")
 
 	// Register Handler
 	mux.HandleFunc("/servicediscovery/register", func(w http.ResponseWriter, r *http.Request) {

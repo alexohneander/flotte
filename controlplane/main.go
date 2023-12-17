@@ -19,7 +19,7 @@ func main() {
 	// Register Handler
 	mux = servicediscovery.RegisterHandler(mux, db)
 
-	log.Println("Starting flotte, control plane initialized")
+	log.Println("Starting flotte, ControlPlane initialized")
 	err := http.ListenAndServe(":4000", mux)
 	if err != nil {
 		log.Fatal(err)
