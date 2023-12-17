@@ -6,10 +6,9 @@ import (
 	"net/http"
 )
 
-func main() {
+var RegToken string = servicediscovery.InitializedToken()
 
-	// Create Register Token if not exists
-	servicediscovery.InitializedToken()
+func main() {
 
 	// Create a new ServeMux
 	mux := http.NewServeMux()

@@ -41,8 +41,8 @@ func InitializedToken() string {
 func createToken() string {
 	// Create Secure Token and encode it to base64
 
-	// create 128bit random string
-	tokenPlain := randSeq(4096)
+	// create 64bit random string
+	tokenPlain := randSeq(64)
 
 	// Encode token with base64
 	token := b64.StdEncoding.EncodeToString([]byte(tokenPlain))
