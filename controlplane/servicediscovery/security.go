@@ -12,12 +12,7 @@ func InitializedToken() string {
 	if _, err := os.Stat("/tmp/token.yaml"); err == nil {
 		log.Println("ServiceDiscovery: Token file exists")
 		// If yes, read token.yaml
-		tokenByte, err := os.ReadFile("/tmp/token.yaml")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		token := string(tokenByte)
+		token := GetToken()
 		return token
 	} else if os.IsNotExist(err) {
 		log.Println("ServiceDiscovery: Token file does not exist")
@@ -47,6 +42,22 @@ func createToken() string {
 	// Encode token with base64
 	token := b64.StdEncoding.EncodeToString([]byte(tokenPlain))
 	return token
+}
+
+func GetToken() string {
+	// Check if token.yaml exists
+	if _, err := os.Stat("/tmp/token.yaml"); err == nil {
+		tokenByte, err := os.ReadFile("/tmp/token.yaml")
+		if err != nil {
+			log.Fatal(err)
+		}
+		token := string(tokenByte)
+		return token
+	} else if os.IsNotExist(err) {
+		log.Println("ServiceDiscovery: Token file does not exist")
+		return ""
+	}
+	return ""
 }
 
 func randSeq(n int) string {

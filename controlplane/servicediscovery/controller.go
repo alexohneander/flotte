@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-var RegToken string = InitializedToken()
+var RegToken string = GetToken()
 
 func Register(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
