@@ -3,7 +3,6 @@ package servicediscovery
 import (
 	"encoding/json"
 	"flotte/controlplane/model"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -15,6 +14,9 @@ import (
 var RegToken string = GetToken()
 
 func RegisterWorker(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
+	// Set Header
+	w.Header().Set("Content-Type", "application/json")
+
 	if r.Method == "POST" {
 		if r.Body != nil {
 			defer r.Body.Close()
@@ -49,8 +51,8 @@ func RegisterWorker(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 				log.Println("Service Discovery: Worker registered")
 				var worker model.WorkerPlane
 				db.First(&worker, "ID = ?", id)
+				json.NewEncoder(w).Encode(worker)
 
-				io.WriteString(w, fmt.Sprintf("%v", worker))
 				return
 			}
 		}
