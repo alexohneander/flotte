@@ -2,16 +2,19 @@ package servicediscovery
 
 import (
 	"encoding/json"
+	"flotte/controlplane/model"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 var RegToken string = GetToken()
 
-func Register(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
+func RegisterWorker(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 	if r.Method == "POST" {
 		if r.Body != nil {
 			defer r.Body.Close()
@@ -25,18 +28,31 @@ func Register(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 
 			// Check if token is correct
 			if jsonBody["Token"] != RegToken {
-				log.Println("ServiceDiscovery: Wrong Token")
+				log.Println("Service Discovery: Wrong Token")
 				http.Error(w, "Unauthorized", http.StatusUnauthorized)
 				return
 			} else {
-				log.Println("ServiceDiscovery: Token is correct")
+				log.Println("Service Discovery: Token is correct")
+				id := uuid.New().String()
+				db.Create(&model.WorkerPlane{
+					ID:      id,
+					Name:    jsonBody["Name"].(string),
+					IP:      jsonBody["IP"].(string),
+					APIPort: jsonBody["APIPort"].(string),
+				})
+
+				log.Println("Service Discovery: Worker registered")
+				var worker model.WorkerPlane
+				db.First(&worker, "ID = ?", id)
+
+				io.WriteString(w, fmt.Sprintf("%v", worker))
+				return
 			}
 		}
 
-		log.Println("ServiceDiscovery: Registering Worker..")
 		io.WriteString(w, "Hello, HTTP!\n")
 	} else {
-		log.Println("ServiceDiscovery: Wrong HTTP Method")
+		log.Println("Service Discovery: Wrong HTTP Method")
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
 }

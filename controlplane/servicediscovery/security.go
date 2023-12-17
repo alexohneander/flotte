@@ -12,16 +12,16 @@ var tokenPath string = "/tmp/token.yaml"
 func InitializedToken() string {
 	// Check if token.yaml exists
 	if _, err := os.Stat(tokenPath); err == nil {
-		log.Println("ServiceDiscovery: Token file exists")
+		log.Println("Service Discovery: Token file exists")
 		// If yes, read token.yaml
 		token := GetToken()
 		return token
 	} else if os.IsNotExist(err) {
-		log.Println("ServiceDiscovery: Token file does not exist")
+		log.Println("Service Discovery: Token file does not exist")
 
 		// If not, create token.yaml
 		token := createToken()
-		log.Println("ServiceDiscovery: Token was created")
+		log.Println("Service Discovery: Token was created")
 
 		// Write token to token.yaml
 		err := os.WriteFile(tokenPath, []byte(token), 0644)
@@ -56,7 +56,7 @@ func GetToken() string {
 		token := string(tokenByte)
 		return token
 	} else if os.IsNotExist(err) {
-		log.Println("ServiceDiscovery: Token file does not exist")
+		log.Println("Service Discovery: Token file does not exist")
 		return ""
 	}
 	return ""
