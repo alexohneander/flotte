@@ -5,11 +5,13 @@ import (
 	"io"
 	"log"
 	"net/http"
+
+	"gorm.io/gorm"
 )
 
 var RegToken string = GetToken()
 
-func Register(w http.ResponseWriter, r *http.Request) {
+func Register(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 	if r.Method == "POST" {
 		if r.Body != nil {
 			defer r.Body.Close()
@@ -39,6 +41,6 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Unregister(w http.ResponseWriter, r *http.Request) {
+func Unregister(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
 	http.Error(w, "Not implemented", http.StatusNotImplemented)
 }
