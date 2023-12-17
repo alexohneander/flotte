@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flotte/controlplane/database"
 	"flotte/controlplane/servicediscovery"
 	"log"
 	"net/http"
@@ -9,6 +10,8 @@ import (
 var RegToken string = servicediscovery.InitializedToken()
 
 func main() {
+	// Initialize Database
+	database.InitializeDatabase()
 
 	// Create a new ServeMux
 	mux := http.NewServeMux()
