@@ -11,13 +11,13 @@ var RegToken string = servicediscovery.InitializedToken()
 
 func main() {
 	// Initialize Database
-	database.InitializeDatabase()
+	db := database.InitializeDatabase()
 
 	// Create a new ServeMux
 	mux := http.NewServeMux()
 
 	// Register Handler
-	mux = servicediscovery.RegisterHandler(mux)
+	mux = servicediscovery.RegisterHandler(mux, db)
 
 	log.Println("Starting flotte, control plane initialized")
 	err := http.ListenAndServe(":4000", mux)
