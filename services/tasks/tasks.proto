@@ -1,0 +1,30 @@
+syntax = "proto3";
+option go_package = "github.com/alexohneander/flotte/services/tasks";
+package tasks;
+
+service Tasks {
+  rpc GetTasks (GetTasksRequest) returns (GetTasksResponse) {}
+  rpc MarkTaskAsDone (MarkTaskAsDoneRequest) returns (MarkTaskAsDoneResponse) {}
+}
+
+message GetTasksRequest {
+  string plugin_id = 1;
+}
+
+message GetTasksResponse {
+  string id = 1;
+  string name = 2;
+  int32 number = 3;
+  int32 nreduce = 4;
+  string type = 5;
+  string task_type = 6;
+}
+
+message MarkTaskAsDoneRequest {
+  string id = 1;
+  string task_type = 2;
+}
+
+message MarkTaskAsDoneResponse {
+  string status = 1;
+}
