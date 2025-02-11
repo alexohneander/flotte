@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	reducenode "github.com/alexohneander/flotte/pkg/reduce-node"
+	reducenode "github.com/alexohneander/flotte/internal/reduce-node"
 	"github.com/spf13/cobra"
 )
 

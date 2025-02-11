@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	mapnode "github.com/alexohneander/flotte/pkg/map-node"
+	mapnode "github.com/alexohneander/flotte/internal/map-node"
 	"github.com/spf13/cobra"
 )
 

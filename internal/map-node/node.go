@@ -9,5 +9,5 @@ func Start() {
 			"message": "pong",
 		})
 	})
-	router.Run() // listen and serve on 0.0.0.0:8080
+	router.Run("localhost:4000") // listen and serve on 0.0.0.0:4000
 }

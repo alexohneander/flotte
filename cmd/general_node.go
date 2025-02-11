@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	generalnode "github.com/alexohneander/flotte/pkg/general-node"
+	generalnode "github.com/alexohneander/flotte/internal/general-node"
 	"github.com/spf13/cobra"
 )
 
