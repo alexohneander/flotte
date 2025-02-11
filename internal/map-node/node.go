@@ -29,7 +29,7 @@ func registerAsMapNode() error {
 		Name:     "map-01",
 		NodeType: "map",
 		Address:  "localhost",
-		Port:     4000,
+		Port:     "4000",
 	}
 
 	json_data, err := json.Marshal(serviceRegisterReq)
@@ -43,6 +43,11 @@ func registerAsMapNode() error {
 
 	if err != nil {
 		log.Fatal(err)
+		return err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatal("failed to register as map-node")
 		return err
 	}
 

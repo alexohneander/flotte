@@ -17,6 +17,9 @@ func Start() {
 	// Migrate the schema
 	db.AutoMigrate(&models.Service{})
 
+	// Health Checking
+	go checkHealth()
+
 	// Init API Backend
 	router := gin.Default()
 	router = registerRoutes(router)

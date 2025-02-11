@@ -29,7 +29,7 @@ func registerAsReduceNode() error {
 		Name:     "reduce-01",
 		NodeType: "reduce",
 		Address:  "localhost",
-		Port:     4001,
+		Port:     "4001",
 	}
 
 	json_data, err := json.Marshal(serviceRegisterReq)
@@ -43,6 +43,11 @@ func registerAsReduceNode() error {
 
 	if err != nil {
 		log.Fatal(err)
+		return err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatal("failed to register as reduce-node")
 		return err
 	}
 

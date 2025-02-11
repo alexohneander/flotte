@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Service struct {
 	gorm.Model
-	Name     string
+	Name     string `gorm:"unique"`
 	NodeType string
 	Address  string
-	Port     int
+	Port     string
 	Status   string
 }
