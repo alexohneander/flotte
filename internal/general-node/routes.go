@@ -28,6 +28,13 @@ func registerRoutes(router *gin.Engine) *gin.Engine {
 			})
 		}
 
+		err = registerSerivce(req)
+		if err != nil {
+			c.JSON(500, gin.H{
+				"message": err.Error(),
+			})
+		}
+
 		c.JSON(200, respone.ServiceRegister{
 			ServiceName: req.Name,
 			Status:      "registered",
