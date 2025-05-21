@@ -3,7 +3,7 @@ module github.com/alexohneander/flotte
 go 1.23.5
 
 require (
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/spf13/cobra v1.9.1
 	github.com/u2takey/ffmpeg-go v0.5.0
 	gorm.io/driver/sqlite v1.5.7
